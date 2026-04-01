@@ -25,8 +25,12 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
     raise RuntimeError("DATABASE_URL environment variable is not set. Check your .env file.")
 
-# SQLAlchemy engine — no connect_args needed for PostgreSQL
-engine = create_engine(DATABASE_URL)
+# SQLAlchemy engine with connection pooling to handle idle timeouts in production
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True,   # Checks if connection is alive before using it
+    pool_recycle=300      # Refreshes connections every 5 minutes
+)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
