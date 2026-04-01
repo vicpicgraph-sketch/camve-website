@@ -1,0 +1,25 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Environment variables — NEVER commit secrets
+.env
+
+# SQLite database (legacy, now using PostgreSQL)
+*.db
+*.sqlite3
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
